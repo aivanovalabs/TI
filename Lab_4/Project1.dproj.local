@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.406,=C:\Users\Katsiaryna\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.117,C:\Users\Katsiaryna\Desktop\ТИ\Лаба_2\Unit1.dfm=C:\Users\Katsiaryna\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.547,=C:\Users\Katsiaryna\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.117,C:\Users\Katsiaryna\Desktop\ТИ\Лаба_2\Unit1.pas=C:\Users\Katsiaryna\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.767,C:\Users\Katsiaryna\Desktop\ТИ\Лаба_2\Project1.dproj=C:\Users\Katsiaryna\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2019.10.22 11:14:12.000,C:\Users\Katsiaryna\Desktop\ТИ\Л2\Лаба_2\UnitL.pas=C:\Users\Katsiaryna\Desktop\ТИ\Л2\Лаба_2\Unit1.pas</Transaction>
+    <Transaction>2019.10.22 11:14:12.000,C:\Users\Katsiaryna\Desktop\ТИ\Л2\Лаба_2\UnitL.dfm=C:\Users\Katsiaryna\Desktop\ТИ\Л2\Лаба_2\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

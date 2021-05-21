@@ -1,0 +1,226 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TLaba_2 = class(TForm)
+    Label1: TLabel;
+    calculate: TButton;
+    FileText: TMemo;
+    Cipher: TMemo;
+    GenKey: TEdit;
+    Key: TLabel;
+    Open: TButton;
+    Save: TButton;
+    OpenFile: TOpenDialog;
+    SaveDialog1: TSaveDialog;
+    RegisterK: TEdit;
+    procedure OpenClick(Sender: TObject);
+    procedure KeyGeneration;
+    procedure calculateClick(Sender: TObject);
+    procedure RegisterKChange(Sender: TObject);
+    procedure RegisterKKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Laba_2: TLaba_2;
+
+implementation
+
+uses
+    Math;
+{$R *.dfm}
+
+function IntToBin(Number: Integer): string;
+const
+    bin = 2;
+    amount = 8;
+var
+    BinStr: string;
+    count, i: Integer;
+begin
+    BinStr := '';
+    Count := 0;
+    while (Number <> 0) do
+    begin
+        BinStr := IntToStr(Number mod bin) + BinStr;
+        Number := Number div bin;
+        inc(Count);
+    end;
+    if (Count < amount) then
+    begin
+        for i := 1 to (amount - count) do
+           BinStr := '0' + BinStr;
+    end;
+    Result := BinStr;
+end;
+
+function StrToNum(Str: String): Integer;
+var
+    sum, i, Num: integer;
+    n: real;
+begin
+  sum := 0;
+  for i := 1 to length(str) do
+  begin
+      if str[i] <> '0' then
+      begin
+          N := power(2, length(str)- i );
+          Num := round(N);
+         // Writeln(Num);
+          Sum := sum + Num;
+      end;
+  end;
+  result := sum;
+end;
+
+procedure TLaba_2.OpenClick(Sender: TObject);
+const
+   EmptyFileError = 'Похоже, файл пустой. Повторите попытку';
+var
+   CipherFile: File of Byte;
+   Temp: String;
+   ByteArray: array of Byte;
+   TempByte, i, Size: Integer;
+   ByteStr: String;
+   //var
+//    FileName: string;
+//    MyFile, FileRes: File of Byte;
+//    StrF: text;
+//    TempByte: Integer;
+//    Buf: array[0..65536] of byte;
+//    i, k: integer;
+//    str, temp, ByteStr : String;
+//    t, size: Byte;
+//     byteArray: array of Byte;
+////     arrXor: array of Integer;
+begin
+   if OpenFile.Execute then
+   begin
+         AssignFile(CipherFile, OpenFile.FileName);
+         Reset(CipherFile);
+         if Eof(CipherFile) then
+         begin
+            MessageDlg(EmptyFileError, mtError, [mbRetry], 0);
+         end;
+         Size := fileSize(CipherFile);
+         SetLength(byteArray, Size);
+         ByteStr := '';
+         for i := 0 to Size - 1 do
+         begin
+             BlockRead(CipherFile, TempByte, 1);
+             ByteArray[i] := TempByte;
+         end;
+         CloseFile(CipherFile);
+         ByteStr := '';
+         for i := 0 to 15 do
+         begin
+            ByteStr := ByteStr + IntToBin(ByteArray[i]);
+         end;
+          FileText.Lines.Text := ByteStr;
+   end;
+//    setLength(ArrXor, 7*8);
+//    for i := 0 to 7 do
+//    begin
+//        write(IntToBin(byteArray[i]));
+//        ByteStr := ByteStr + IntToBin(byteArray[i]);
+//    end;
+//    Writeln('+++++++++');
+//    for i := 0 to 63 do
+//    begin
+//        //write(IntToBin(byteArray[i]));
+//        ArrXor[i] := StrToInt(ByteStr[i + 1]);
+//        write(Arrxor[i]);
+//    end;
+//
+//    NNumber := StrToNum(ByteStr);
+//    Writeln('+++++++++',NNumber, '++++++++');
+
+end;
+
+procedure TLaba_2.RegisterKChange(Sender: TObject);
+begin
+//    if Length(RegisterK.Text) = 26 then
+//        Calculate.Enabled := True
+//    else
+//        Calculate.Enabled := False;
+
+        Calculate.Enabled := Length(RegisterK.Text) = 26;
+
+end;
+
+procedure TLaba_2.RegisterKKeyPress(Sender: TObject; var Key: Char);
+var
+    Numb: Set of Char;
+begin
+    Numb := ['0','1', #8];
+    if not(Key in Numb) then
+        Key := #0;
+end;
+
+procedure TLaba_2.calculateClick(Sender: TObject);
+begin
+
+    KeyGeneration;
+end;
+
+procedure TLaba_2.KeyGeneration;
+const
+    Num1 = 1;
+    Num2 = 7;
+    Num3 = 8;
+    MaxNumb = 26;
+
+    Mask = 33554431;//01111111111111111111111111
+    bin = 2;
+var
+    i, bit, KeyLength: Integer;
+    PowerOfTwo: real;
+    NumStr, ByteStr, Key: String;
+    Number: Integer;
+begin
+    Number := StrToNum(RegisterK.Text);
+    //Number := 67100672;
+    //writeln(Number);
+    PowerOfTwo := power(bin, MaxNumb);
+    KeyLength := round(PowerOfTwo);
+   // SetLength(Key, KeyLength);
+    Key  := '';
+    for i := 0 to 127  do
+    begin
+        bit :=  ((Number shr (MaxNumb - 1)) and 1) xor ((Number shr (Num1 - 1)) and 1) xor ((Number shr (Num2 - 1)) and 1) xor ((Number shr (Num3 - 1)) and 1);
+        Key := Key + IntToStr((Number shr (MaxNumb - 1)) and 1) ;
+        Number := ((Number and Mask) shl 1) xor bit; // обнуление старшего бита,
+        //сдвиг влево и присваиваем младшему значение bit
+    end;
+    GenKey.Text := Key;
+end;
+
+
+procedure xorrr();
+var
+  Res: Integer;
+  ResS, RR: String;
+  i: Integer;
+  REsarr: array [0..63] of integer;
+begin
+  resS := '';
+  Writeln;
+  for i := 0 to 63 do
+  begin
+    REsarr[i] := ArrXor[i] xor Key[i];
+    Write(REsarr[i]);
+  end;
+
+end;
+
+
+end.

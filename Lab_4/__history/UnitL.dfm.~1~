@@ -1,0 +1,102 @@
+object LFSR: TLFSR
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  Caption = 'LFSR'
+  ClientHeight = 390
+  ClientWidth = 492
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 24
+    Top = 8
+    Width = 150
+    Height = 13
+    Caption = #1042#1074#1077#1076#1080#1090#1077'  '#1089#1086#1089#1090#1086#1103#1085#1080#1077' '#1088#1077#1075#1080#1089#1090#1088#1072
+  end
+  object KeyL: TLabel
+    Left = 280
+    Top = 46
+    Width = 122
+    Height = 13
+    Caption = #1057#1075#1077#1085#1077#1088#1080#1088#1086#1074#1072#1085#1085#1099#1081' '#1082#1083#1102#1095
+  end
+  object RegisterK: TEdit
+    Left = 8
+    Top = 43
+    Width = 177
+    Height = 21
+    MaxLength = 26
+    TabOrder = 0
+    OnChange = RegisterKChange
+    OnKeyPress = RegisterKKeyPress
+  end
+  object calculate: TButton
+    Left = 8
+    Top = 70
+    Width = 177
+    Height = 25
+    Caption = 'calculate'
+    Enabled = False
+    TabOrder = 1
+    OnClick = calculateClick
+  end
+  object FileText: TMemo
+    Left = 8
+    Top = 120
+    Width = 225
+    Height = 257
+    TabOrder = 2
+  end
+  object Cipher: TMemo
+    Left = 248
+    Top = 120
+    Width = 236
+    Height = 262
+    Lines.Strings = (
+      ''
+      '')
+    TabOrder = 3
+  end
+  object GenKey: TEdit
+    Left = 207
+    Top = 72
+    Width = 277
+    Height = 21
+    TabOrder = 4
+  end
+  object Open: TButton
+    Left = 207
+    Top = 8
+    Width = 129
+    Height = 25
+    Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083
+    TabOrder = 5
+    OnClick = OpenClick
+  end
+  object Save: TButton
+    Left = 342
+    Top = 8
+    Width = 145
+    Height = 25
+    Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' '#1092#1072#1081#1083' '
+    TabOrder = 6
+    OnClick = SaveClick
+  end
+  object OpenFile: TOpenDialog
+    Left = 208
+    Top = 104
+  end
+  object SaveF: TSaveDialog
+    Left = 256
+    Top = 104
+  end
+end
